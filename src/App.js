@@ -3,6 +3,12 @@ import chatdata from './data.json'
 import './App.css'
 import { CSSTransitionGroup } from 'react-transition-group'
 
+function delay(amount = 0) {
+  return new Promise(resolve => {
+    setTimeout(resolve, amount)
+  })
+}
+
 class Bubble extends Component {
   constructor(props) {
     super(props)
@@ -13,64 +19,64 @@ class Bubble extends Component {
     }
     this.shadowBubble = React.createRef()
   }
+
+  removeLoadingAfter(dl = 0) {
+    delay(dl).then(_ => {
+      this.setState({isTyping: false})
+      this.props.onFinish()
+    })
+  }
+
+  addLoading() {
+    this.setState({
+      isTyping: true,
+      width: '64px',
+      height: '40px'
+    })
+  }
+
+  updateSizeAfter(dl = 0) {
+    delay(dl).then(_ => {
+      this.setState({
+        width: this.shadowBubble.current.offsetWidth,
+        height: this.shadowBubble.current.offsetHeight
+      })
+    })
+  }
+
   componentWillMount() {
     const sender = this.props.sender
+    
+    if (sender != 'me') return
+
+    this.addLoading()
 
     if (this.props.content.indexOf('<img') >= 0) {
       var res = this.props.content.match(/src="([^"]+)"/)
-      this.setState({
-        isTyping: true,
-        width: '64px',
-        height: '40px'
-      })
-
       var img = new Image()
       img.onload = _ => {
-        this.setState({
-          width: this.shadowBubble.current.offsetWidth,
-          height: this.shadowBubble.current.offsetHeight
-        })
-        setTimeout(_ => {
-          this.setState({isTyping: false})
-          this.props.onFinish()
-        }, 250)
+        this.removeLoadingAfter(500 + 100)
+        this.updateSizeAfter(500)
       }
-
       img.src = res[1]
-      
+  
     } else {
       const length = this.props.content.length
       if (sender == 'me' && length > 20) {
-        this.setState({
-          isTyping: true,
-          width: '64px',
-          height: '40px'
-        })
-        setTimeout(_ => {
-          this.setState({
-            width: this.shadowBubble.current.offsetWidth,
-            height: this.shadowBubble.current.offsetHeight
-          })
-          setTimeout(_ => {
-            this.setState({isTyping: false})
-            this.props.onFinish()
-          }, 250)
-        }, length / 20 * 600)
+        this.removeLoadingAfter(length / 20 * 600 + 250)
+        this.updateSizeAfter(length / 20 * 600)
+      } else {
+        this.removeLoadingAfter(450)
+        this.updateSizeAfter(200)
       }
     }
     
     
   }
   render() {
-    var b
-
-    var c
-
-    if (this.props.content.indexOf('<img') >= 0) {
-      c = <div className="img-content" dangerouslySetInnerHTML={{__html: this.props.content}}></div>
-    } else {
-      c = <div className="content" dangerouslySetInnerHTML={{__html: this.props.content}}></div>
-    }
+    var b, c = this.props.content.indexOf('<img') >= 0 ?
+      (<div className="img-content" dangerouslySetInnerHTML={{__html: this.props.content}}></div>) :
+      (<div className="content" dangerouslySetInnerHTML={{__html: this.props.content}}></div>)
 
     if (this.state.isTyping) {
       b = (
@@ -111,14 +117,20 @@ class Replies extends Component {
   }
   render() {
     return (
-        <div className={this.props.isSendingMsg ? 'disabled inner' : 'inner'} key={this.props.akey}>
-            <div className="replies">
-              {this.props.replies.map((r, i) =>
-                <button onClick={this.onReplyClick(r.answer, r.goto)}>{r.answer}</button>
-              )}
-              <div className="blank"></div>
-            </div>
-        </div>
+      <div className={this.props.isSendingMsg ? 'disabled inner' : 'inner'}>
+        <CSSTransitionGroup
+          component="div"
+          transitionName="fade" 
+          transitionEnterTimeout={300} 
+          transitionLeaveTimeout={300}>
+          <div className="replies" key={this.props.akey}>
+            {this.props.replies.map((r, i) =>
+              <button onClick={this.onReplyClick(r.answer, r.goto)}>{r.answer}</button>
+            )}
+            <div className="blank"></div>
+          </div>
+        </CSSTransitionGroup>
+      </div>
     )
   }
 }
@@ -129,18 +141,8 @@ class App extends Component {
     super(props)
     this.state = {
       chatPool: chatdata,
-      msgList: [
-        // {
-        //   "sender": "",
-        //   "content": ""
-        // }
-      ],
-      replies: [
-        // {
-        //   "answer": "",
-        //   "goto": ""
-        // }
-      ],
+      msgList: [],
+      replies: [],
       nextKey: 'ice',
       sender: 'me',
       repId: 0,
@@ -150,57 +152,43 @@ class App extends Component {
     this.scrollList = React.createRef()
   }
 
-  delay(amount = 0) {
-    return new Promise(resolve => {
-      setTimeout(resolve, amount)
-    })
-  }
-
   say(sender, content) {
-    this.setState({
-      sender: sender
-    })
+    this.setState({ sender })
     this.setState(prevState => ({
       msgList: [...prevState.msgList, { sender, content } ]
     }))
-    this.delay(100).then(this.updateScroll.bind(this))
+    delay(100).then(this.updateScroll.bind(this))
   }
 
   updateScroll() {
     const $chatbox = this.scrollList.current
     const distance = $chatbox.scrollHeight - $chatbox.offsetHeight - $chatbox.scrollTop
-    const duration = 250
+    const duration = 500
     const startTime = Date.now()
     requestAnimationFrame(function step() {
         const p = Math.min(1, (Date.now() - startTime) / duration)
         $chatbox.scrollTop = $chatbox.scrollTop + distance * p
-        if (p < 1) {
-          requestAnimationFrame(step)
-        } else {
-          return
-        }
+        p < 1 && requestAnimationFrame(step)
     })
   }
 
   updateReplies() {
     var nextKey = this.state.nextKey
     var replies = this.state.chatPool[nextKey].reply
-    this.setState({ repId: this.time() })
-    this.setState({ replies })
-    this.delay(0).then(_ => this.setState({ isSendingMessage: false }))
+    this.setState({ repId: this.time(), replies })
+    delay(200).then(_ => this.setState({ isSendingMessage: false }))
   }
 
 
   getMyWords() {
     var nextKey = this.state.nextKey
     var chat = [...this.state.chatPool[nextKey].says]
-    this.setState({buffer: chat.reverse()})
+    this.setState({ buffer: chat.reverse() })
   }
 
   getOneMsg() {
-    if (this.state.buffer.length == 0) {
-      return false
-    }
+    if (this.state.buffer.length == 0) return false
+
     var bufferCopy = [...this.state.buffer]
     var result = bufferCopy.pop()
     this.setState({buffer: [...bufferCopy]})
@@ -213,31 +201,21 @@ class App extends Component {
       this.say(this.state.sender, content)
     } else {
       this.updateReplies()
-      this.setState({
-        isSendingMessage: false
-      }) 
     }
     
   }
 
-  componentDidMount() {
-    this.setState({
-      nextKey: 'ice'
-    })
+  componentWillMount() {
+    this.setState({ nextKey: 'ice' })
     this.getMyWords()
     this.updateReplies()
-    this.delay(0).then(_ => this.setState({ isSendingMessage: true }))
-    setTimeout(_ => {
-      this.getAndSay()
-    }, 200)
+    delay(300).then(_ => this.setState({ isSendingMessage: true }))
+    delay(200).then(_ => this.getAndSay())
   }
 
   onSent() {
-    this.delay(0).then(this.updateScroll.bind(this))
-    this.delay(500).then(_ => {
-      this.getAndSay()
-    })
-
+    delay(0).then(this.updateScroll.bind(this))
+    delay(600).then(_ => this.getAndSay())
   }
 
   handleReplyClick(answer, goto) {
@@ -249,21 +227,15 @@ class App extends Component {
       buffer: [answer]
     })
 
-    this.delay(200).then(_ => {
+    delay(0).then(_ => {
       this.getAndSay()
-      this.setState({
-        nextKey: goto
-      })
+      this.setState({ nextKey: goto })
       this.getMyWords()
-      this.delay(500).then(_ => {
-        this.setState({
-          sender: 'me'
-        })
+      delay(800).then(_ => {
+        this.setState({ sender: 'me' })
         this.getAndSay()
       })
     })
-
-    
   }
 
   time() {
