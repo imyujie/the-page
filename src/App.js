@@ -240,8 +240,8 @@ class App extends Component {
   }
 
   onSent() {
-    delay(0).then(this.updateScroll.bind(this))
-    delay(getRandomNumber(500, 1000)).then(_ => this.getAndSay())
+    delay(SHORT_GAP).then(this.updateScroll.bind(this))
+    delay(getRandomNumber(SCROLL_DURATION, 1000)).then(_ => this.getAndSay())
   }
 
   handleReplyClick(answer, goto) {
