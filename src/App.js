@@ -24,7 +24,7 @@ const SHORT_GAP = 100
 const IMAGE_LOADING_PADDING = 500
 const RESIZING_TIME = 250
 const SCROLL_DURATION = 500
-const MINIMUM_TYPING_TIME = 300
+const MINIMUM_TYPING_TIME = 500
 const MSG_ANIMATE_TIME = 500
 
 class Bubble extends Component {
@@ -82,7 +82,7 @@ class Bubble extends Component {
       console.log(length)
 
       var typingTime = (sender === 'me' && length > 10) ?
-        length / 10 * 400 : MINIMUM_TYPING_TIME
+      MINIMUM_TYPING_TIME + length / 10 * 400 : MINIMUM_TYPING_TIME
       this.removeLoadingAfter(typingTime + this.props.wait + RESIZING_TIME)
       this.updateSizeAfter(typingTime + this.props.wait)
     }
@@ -241,7 +241,7 @@ class App extends Component {
 
   onSent() {
     delay(0).then(this.updateScroll.bind(this))
-    delay(getRandomNumber(400, 1000)).then(_ => this.getAndSay())
+    delay(getRandomNumber(500, 1000)).then(_ => this.getAndSay())
   }
 
   handleReplyClick(answer, goto) {
