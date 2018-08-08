@@ -19,7 +19,7 @@ function getRandomNumber(min, max) {
 
 const MESSAGE_GAP = 700
 const SENDER_SWITCH_GAP = 1200
-const START_AFTER = 500
+const START_AFTER = 1000
 const SHORT_GAP = 100
 const IMAGE_LOADING_PADDING = 500
 const RESIZING_TIME = 250
