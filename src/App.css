@@ -25,20 +25,25 @@ html, body {
   overflow: hidden;
 }
 
-.row:first-child {
+.animate-row-container:first-child {
   padding-top: 16px;
 }
 
 .row:last-child {
-  padding-bottom: 36px;
+  /* padding-bottom: 36px; */
 }
 
+.msg-list-padding {
+  height: 36px;
+}
 .bubble {
   overflow: hidden;
   max-width: 83%;
   box-sizing: border-box;
-  /* padding: 10px 12px; */
   color: #343A40;
+}
+
+.bubble-transition {
   transition: width 220ms, height 220ms;
 }
 
@@ -201,11 +206,11 @@ html, body {
   transform-origin: 100% 100%;
 }
 
-.bounceIn-enter {
-
+.bounceIn-enter.bounceIn-enter-active {
+  animation: msgBounceIn 400ms;
 }
 
-.bounceIn-enter.bounceIn-enter-active {
+.bounceIn-appear.bounceIn-appear-active {
   animation: msgBounceIn 400ms;
 }
 
