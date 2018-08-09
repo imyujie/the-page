@@ -70,11 +70,8 @@ class Bubble extends Component {
 
   componentWillMount() {
     const { sender, content } = this.props
-
-    if (sender !== 'me') {
-      return
-    }
-
+    
+    if (sender !== 'me') return
     this.addLoading()
 
   }
@@ -135,7 +132,8 @@ class Bubble extends Component {
           transitionAppearTimeout={MSG_ANIMATE_TIME} >
         <div className={this.props.sender === 'me' ? 'row left-row' : 'row right-row'}>
           <div className="chat-row">
-            <div style={{width: this.state.width, height: this.state.height}} className={this.props.sender === 'me' ? 'bubble bubble-transition left' : 'bubble right'}>
+            <div style={{width: this.state.width, height: this.state.height}}
+                 className={this.props.sender === 'me' ? 'bubble bubble-transition left' : 'bubble right'}>
               {b}
             </div>
           </div>
@@ -283,7 +281,7 @@ class App extends Component {
       return
     }
     this.updateScroll().then(_ => 
-      delay(getRandomNumber(0, MESSAGE_GAP)).then(_ => this.getAndSay())
+      delay(getRandomNumber(300, MESSAGE_GAP)).then(_ => this.getAndSay())
     )
   }
 
