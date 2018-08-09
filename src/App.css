@@ -206,11 +206,13 @@ html, body {
   transform-origin: 100% 100%;
 }
 
-.bounceIn-enter.bounceIn-enter-active {
-  animation: msgBounceIn 400ms;
+.bounceIn-appear {
+  opacity: 0;
 }
 
 .bounceIn-appear.bounceIn-appear-active {
+  opacity: 1;
+  transition: opacity 400ms;
   animation: msgBounceIn 400ms;
 }
 

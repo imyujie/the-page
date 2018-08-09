@@ -19,8 +19,6 @@ function getRandomNumber(min, max) {
 
 const MESSAGE_GAP = 400
 const SENDER_SWITCH_GAP = 800
-const START_AFTER = 1000
-const SHORT_GAP = 100
 const IMAGE_LOADING_PADDING = 500
 const RESIZING_TIME = 250
 const REPLY_TRANSITION_TIME = 300
@@ -69,8 +67,8 @@ class Bubble extends Component {
 
 
   componentWillMount() {
-    const { sender, content } = this.props
-    
+    const { sender } = this.props
+
     if (sender !== 'me') return
     this.addLoading()
 
@@ -90,6 +88,7 @@ class Bubble extends Component {
         img.onload = _ => {
           this.updateSizeAfter(IMAGE_LOADING_PADDING + wait)
           .then(_ => this.removeLoadingAfter(RESIZING_TIME))
+          .then(_ => delay(100))
           .then(_ => this.props.onFinish())
         }
         img.src = res[1]
@@ -99,6 +98,7 @@ class Bubble extends Component {
         var typingTime = content.length >= 10 ? MINIMUM_TYPING_TIME + content.length / 10 * 400 : MINIMUM_TYPING_TIME
         this.updateSizeAfter(typingTime + wait)
           .then(_ => this.removeLoadingAfter(RESIZING_TIME))
+          .then(_ => delay(100))
           .then(_ => this.props.onFinish())
       }
     } else {
@@ -202,8 +202,8 @@ class App extends Component {
 
       if (distance === 0) {
         resolve()
-        return
       }
+
       requestAnimationFrame(function step() {
         const p = Math.min(1, (Date.now() - startTime) / SCROLL_DURATION)
         $chatbox.scrollTop = $chatbox.scrollTop + distance * p
