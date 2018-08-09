@@ -14,16 +14,16 @@ function time() {
 }
 
 function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 const MESSAGE_GAP = 700
-const SENDER_SWITCH_GAP = 1200
+const SENDER_SWITCH_GAP = 800
 const START_AFTER = 1000
 const SHORT_GAP = 100
 const IMAGE_LOADING_PADDING = 500
 const RESIZING_TIME = 250
-const SCROLL_DURATION = 500
+const SCROLL_DURATION = 300
 const MINIMUM_TYPING_TIME = 500
 const MSG_ANIMATE_TIME = 500
 
@@ -39,52 +39,80 @@ class Bubble extends Component {
   }
 
   removeLoadingAfter(dl = 0) {
-    delay(dl).then(_ => {
-      this.setState({isTyping: false})
-      this.props.onFinish()
+    return new Promise(resolve => {
+      delay(dl).then(_ => {
+        this.setState({isTyping: false})
+        delay(0).then(resolve.bind(this))
+      })
     })
+    
   }
 
   addLoading() {
-    this.setState({
-      isTyping: true,
-      width: '64px',
-      height: '40px'
+    return new Promise(resolve => {
+      this.setState({
+        isTyping: true,
+        width: '64px',
+        height: '40px'
+      })
+      delay(0).then(resolve.bind(this))
     })
+    
   }
 
   updateSizeAfter(dl = 0) {
-    delay(dl).then(_ => {
-      this.setState({
-        width: this.shadowBubble.current.offsetWidth,
-        height: this.shadowBubble.current.offsetHeight
+    return new Promise(resolve => {
+      delay(dl).then(_ => {
+        this.setState({
+          width: this.shadowBubble.current.offsetWidth,
+          height: this.shadowBubble.current.offsetHeight
+        })
+        delay(0).then(resolve.bind(this))
       })
     })
   }
 
+
   componentWillMount() {
-    const sender = this.props.sender
-    if (sender !== 'me') return
+    const { sender, content } = this.props
 
-    this.addLoading()
+    if (sender !== 'me') {
+      return
+    }
 
-    if (this.props.content.indexOf('<img') >= 0) {
-      var res = this.props.content.match(/src="([^"]+)"/)
-      var img = new Image()
-      img.onload = _ => {
-        this.removeLoadingAfter(IMAGE_LOADING_PADDING + RESIZING_TIME + this.props.wait)
-        this.updateSizeAfter(IMAGE_LOADING_PADDING + this.props.wait)
+    if (content.indexOf('<img') >= 0 || content.length >= 10) {
+      this.addLoading()
+    }
+
+  }
+
+  componentDidMount() {
+    const { isTyping } = this.state
+    const { sender, content, wait } = this.props
+
+    if (isTyping) {
+      this.props.onHeightChange()
+      if (content.indexOf('<img') >= 0) {
+        var res = content.match(/src="([^"]+)"/)
+        var img = new Image()
+        img.onload = _ => {
+          this.updateSizeAfter(IMAGE_LOADING_PADDING + wait)
+          .then(_ => this.removeLoadingAfter(RESIZING_TIME))
+          .then(_ => this.props.onFinish())
+        }
+        img.src = res[1]
+      } else if (content.length >= 10) {
+        var typingTime = MINIMUM_TYPING_TIME + content.length / 10 * 400
+        this.addLoading().then(_ => {
+          this.updateSizeAfter(typingTime + wait)
+          .then(_ => this.removeLoadingAfter(RESIZING_TIME))
+          .then(_ => this.props.onFinish())
+        })
       }
-      img.src = res[1]
-  
     } else {
-      const length = this.props.content.length
-      console.log(length)
-
-      var typingTime = (sender === 'me' && length > 10) ?
-      MINIMUM_TYPING_TIME + length / 10 * 400 : MINIMUM_TYPING_TIME
-      this.removeLoadingAfter(typingTime + this.props.wait + RESIZING_TIME)
-      this.updateSizeAfter(typingTime + this.props.wait)
+      if (sender == 'me') {
+        delay(0).then(_ => this.props.onFinish())
+      }
     }
   }
 
@@ -123,10 +151,9 @@ class Bubble extends Component {
 
 class Replies extends Component {
   onReplyClick(answer, goto) {
-    return () => {
-      this.props.onRClick(answer, goto)
-    }
+    return _ => this.props.onRClick(answer, goto)
   }
+
   render() {
     return (
       <div className={this.props.isSendingMsg ? 'disabled inner' : 'inner'}>
@@ -166,21 +193,24 @@ class App extends Component {
   }
 
   say(sender, content, wait) {
-    this.setState({ sender })
     this.setState(prevState => ({
+      sender,
       msgList: [...prevState.msgList, { sender, content, wait } ]
     }))
-    delay(SHORT_GAP).then(this.updateScroll.bind(this))
+    // delay(SHORT_GAP).then(this.updateScroll.bind(this))
   }
 
   updateScroll() {
-    const $chatbox = this.scrollList.current
-    const distance = $chatbox.scrollHeight - $chatbox.offsetHeight - $chatbox.scrollTop
-    const startTime = Date.now()
-    requestAnimationFrame(function step() {
-      const p = Math.min(1, (Date.now() - startTime) / SCROLL_DURATION)
-      $chatbox.scrollTop = $chatbox.scrollTop + distance * p
-        p < 1 && requestAnimationFrame(step)
+    return new Promise(resolve => {
+      const $chatbox = this.scrollList.current
+      const distance = $chatbox.scrollHeight - $chatbox.offsetHeight - $chatbox.scrollTop
+      const startTime = Date.now()
+      requestAnimationFrame(function step() {
+        const p = Math.min(1, (Date.now() - startTime) / SCROLL_DURATION)
+        $chatbox.scrollTop = $chatbox.scrollTop + distance * p
+          if (p < 1) { requestAnimationFrame(step) }
+          else { resolve() }
+      })
     })
   }
 
@@ -223,6 +253,7 @@ class App extends Component {
     var msg = this.getOneMsg()
 
     if (msg) {
+      this.setState({ isSendingMessage: true})
       const { content, wait } = msg
       this.say(this.state.sender, content, wait)
     } else {
@@ -235,13 +266,25 @@ class App extends Component {
     this.setState({ nextKey: 'ice' })
     this.getMyWords()
     this.updateReplies()
-    delay(START_AFTER + 100).then(_ => this.setState({ isSendingMessage: true }))
-    delay(START_AFTER).then(_ => this.getAndSay())
+  }
+
+  componentDidMount() {
+    delay(SHORT_GAP).then(_ => this.getAndSay())
+  }
+
+  onHeightChange() {
+    this.updateScroll()
   }
 
   onSent() {
-    delay(SHORT_GAP).then(this.updateScroll.bind(this))
-    delay(getRandomNumber(SCROLL_DURATION, 1000)).then(_ => this.getAndSay())
+    if (this.state.buffer.length === 0) {
+      this.updateReplies()
+      this.updateScroll()
+      return
+    }
+    this.updateScroll().then(_ => 
+      delay(getRandomNumber(0, 300)).then(_ => this.getAndSay())
+    )
   }
 
   handleReplyClick(answer, goto) {
@@ -255,15 +298,17 @@ class App extends Component {
 
     delay(0).then(_ => {
       this.getAndSay()
+      this.updateScroll()
+
       this.setState({ nextKey: goto })
       this.getMyWords()
+
       delay(SENDER_SWITCH_GAP).then(_ => {
         this.setState({ sender: 'me' })
         this.getAndSay()
       })
     })
   }
-
 
 
   render() {
@@ -276,7 +321,7 @@ class App extends Component {
           transitionEnterTimeout={MSG_ANIMATE_TIME} 
           transitionLeaveTimeout={MSG_ANIMATE_TIME}>
             {this.state.msgList.map((m, i) =>
-              <Bubble key={i} onFinish={this.onSent.bind(this)} {...m} />
+              <Bubble key={i} onFinish={this.onSent.bind(this)} onHeightChange={this.onHeightChange.bind(this)} {...m} />
             )}
           </CSSTransitionGroup>
         </div>
