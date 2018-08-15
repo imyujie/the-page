@@ -103,7 +103,7 @@ class Bubble extends Component {
       }
     } else {
       this.setStateAsync({
-        width: this.shadowBubble.current.offsetWidth,
+        width: this.shadowBubble.current.offsetWidth + 4,
         height: this.shadowBubble.current.offsetHeight
       }).then(_ => this.props.onFinish())
     }
