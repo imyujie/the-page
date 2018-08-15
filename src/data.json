@@ -11,25 +11,228 @@
       },
       {
         "answer": "你是不是有事求我？",
-        "goto": "apple"
+        "goto": "matter"
       },
       {
         "answer": "老子就是好看怎么滴",
-        "goto": "apple"
+        "goto": "what"
       }
     ]
   },
-  "apple": {
+
+  "what": {
     "says": [
-      "试试看一句很长的橘子会怎么样表现出来在你的好看",
-      "试试看一句很长的橘子会怎么样表现出来在你的好看",
-      "<img src=\"https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2958845918,757860053&fm=173&app=25&f=JPG?w=218&h=146&s=3291A1644F62B15356EC5C920300808E\">",
-      "试试看一句很长的橘子会怎么样表现出来在你的好看界面上面的白色背景图片上面"
+      "哎呀这么凶，你今天是不是心情不太好？"
     ],
     "reply": [
       {
-        "answer": "我不知道耶",
-        "goto": "ice"
+        "answer": "你怎么知道的",
+        "goto": "howdoyouknow"
+      }
+    ]
+  },
+
+  "howdoyouknow": {
+    "says": [
+      "你管我，快说说为什么心情不好"
+    ],
+    "reply": [
+      {
+        "answer": "男票惹我不开心了",
+        "goto": "bfsad"
+      },
+      {
+        "answer": "别的乱七八糟的事情",
+        "goto": "othersad"
+      }
+    ]
+  },
+
+  "bfsad": {
+    "says": [
+      "哈？你有男票啦？他是谁？",
+      "他肯定有故意说什么话气你了",
+      "那个坏蛋，我帮你去揍他"
+    ],
+    "reply": [
+      {
+        "answer": "好，打死他",
+        "goto": "beathim"
+      },
+      {
+        "answer": "还是不要了",
+        "goto": "dontbeat"
+      }
+    ]
+  },
+
+  "beathim": {
+    "says": [
+      "我记下来了，过会就去打他",
+      "他总是让你不开心吗？"
+    ],
+    "reply": [
+      {
+        "answer": "是呀，老爱欺负我",
+        "goto": "hurtme"
+      }
+    ]
+  },
+
+  "hurtme": {
+    "says": [
+      "他可能也不是故意的",
+      "也有可能是遇到什么不顺心的事了呢"
+    ],
+    "reply": [
+      {
+        "answer": "我知道，那也不能拿我发火呀对不对",
+        "goto": "cantdo"
+      }
+    ]
+  },
+
+  "cantdo": {
+    "says": [
+      "说的也是",
+      "要不我们说点别的吧"
+    ],
+    "reply": [
+      {
+        "answer": "等等，你是谁呀？",
+        "goto": "who"
+      }
+    ]
+  },
+
+  "dontbeat": {
+    "says": [
+      "为啥呢",
+      "那你还生气吗？"
+    ],
+    "reply": [
+      {
+        "answer": "生气！但没刚刚那么气了",
+        "goto": "[todo]"
+      },
+      {
+        "answer": "不那么爱他了，以后也不想管他了",
+        "goto": "[todo]"
+      }
+    ]
+  },
+
+  "othersad": {
+    "says": [
+      "哎呀，别的事情就不要憋在心里",
+      "你有男票吗？",
+      "可以跟男票诉说一下嘛对不对？"
+    ],
+    "reply": [
+      {
+        "answer": "没有男票",
+        "goto": "havent"
+      },
+      {
+        "answer": "有男票，但他不爱听",
+        "goto": "dontlike"
+      }
+    ]
+  },
+
+  "dontlike": {
+    "says": [
+      "你怎么知道他不爱听",
+      "你先让他知道嘛",
+      "要不你跟我说也可以"
+    ],
+    "reply": [
+      {
+        "answer": "才不要跟你说呢，你谁呀",
+        "goto": "who"
+      }
+    ]
+  },
+
+  "matter": {
+    "says": [
+      "是呀，问你个事",
+      "你有男朋友吗？"
+    ],
+    "reply": [
+      {
+        "answer": "我已经有了",
+        "goto": "have"
+      },
+      {
+        "answer": "还没有呢，怎么？",
+        "goto": "havent"
+      }
+    ]
+  },
+  "have": {
+    "says": [
+      "那你介意多一个吗？"
+    ],
+    "reply": [
+      {
+        "answer": "咦...土不土",
+        "goto": "oldstyle"
+      },
+      {
+        "answer": "介意",
+        "goto": "mind"
+      }
+    ]
+  },
+
+  "oldstyle": {
+    "says": [
+      "好像有一点..."
+    ],
+    "reply": [
+      {
+        "answer": "[todo]",
+        "goto": "[todo]"
+      }
+    ]
+  },
+
+  "mind": {
+    "says": [
+      "哇 宝宝 你好乖呀",
+      "你是不是早就知道我是谁了"
+    ],
+    "reply": [
+      {
+        "answer": "不知道呀，但是现在知道了",
+        "goto": "nowiknow"
+      }
+    ]
+  },
+
+  "nowiknow": {
+    "says": [
+      ""
+    ],
+    "reply": [
+      {
+        "answer": "",
+        "goto": ""
+      }
+    ]
+  },
+
+  "havent": {
+    "says": [
+      "呀，没有？",
+      "让我检测一下你有没有说谎，盯着屏幕别动",
+      "嗯，还算诚实 | 2000"
+    ],
+    "reply": [
+      {
+        "answer": "那当然",
+        "goto": "[todo]"
       }
     ]
   },
@@ -49,10 +252,108 @@
       },
       {
         "answer": "管你是谁，不重要🤷‍",
-        "goto": "ice"
+        "goto": "doesnmatter"
       }
     ]
   },
+
+  "doesnmatter": {
+    "says": [
+      "那谁比较重要？",
+      "男票吗？",
+      "实话告诉你吧，我是魔镜呀",
+      "就是那个什么都知道的魔镜",
+      "你可以试试问我问题"
+    ],
+    "reply": [
+      {
+        "answer": "你知道我爱豆是谁吗？",
+        "goto": "idol"
+      },
+      {
+        "answer": "魔镜魔镜，你知道谁是宇宙第一超级无敌美少女吗？",
+        "goto": "first"
+      }
+    ]
+  },
+
+  "idol": {
+    "says": [
+      "让我想想",
+      "你爱豆的中文名是：",
+      "肖战GG | 3000",
+      "我猜得对吗？"
+    ],
+    "reply": [
+      {
+        "answer": "你怎么知道的！",
+        "goto": "whyyouknow"
+      },
+      {
+        "answer": "被你蒙对了",
+        "goto": "accid"
+      }
+    ]
+  },
+
+  "whyyouknow": {
+    "says": [
+      "我整合了非常多的知识",
+      "所以我知道这些很正常",
+      "我还知道“宇第超无女”是谁呢"
+    ],
+    "reply": [
+      {
+        "answer": "什么“宇第超无女”",
+        "goto": "whatisydc"
+      }
+    ]
+  },
+
+  "whatisydc": {
+    "says": [
+      "宇宙第一超级无敌美少女呀",
+      "她就是...",
+      "唐婕！| 3000"
+    ],
+    "reply": [
+      {
+        "answer": "一本正经地胡说八道",
+        "goto": "saynothing"
+      }
+    ]
+  },
+
+  "saynothing": {
+    "says": [
+      "什么呀，我是说真的",
+      "你有男票吗？"
+    ],
+    "reply": [
+      {
+        "answer": "我已经有了",
+        "goto": "have"
+      },
+      {
+        "answer": "还没有呢，怎么？",
+        "goto": "havent"
+      }
+    ]
+  },
+
+  "accid": {
+    "says": [
+      "那是因为我优秀",
+      "你还想知道别的吗？"
+    ],
+    "reply": [
+      {
+        "answer": "魔镜魔镜，你知道谁是宇宙第一超级无敌美少女吗？",
+        "goto": "first"
+      }
+    ]
+  },
+
   "mirror": {
     "says": [
       "我还真的是魔镜",
@@ -65,8 +366,8 @@
         "goto": "first"
       },
       {
-        "answer": "哼魔镜，幼稚！我还墨镜🕶️咧",
-        "goto": "ice"
+        "answer": "你知道我爱豆是谁吗？",
+        "goto": "idol"
       }
     ]
   },
@@ -88,11 +389,11 @@
   "first": {
     "says": [
       "这个问题有点复杂，让我想想看",
-      "我知道了，是糖宝宝 | 1000"
+      "我知道了，是唐婕 | 1000"
     ],
     "reply": [
       {
-        "answer": "你说的糖宝宝，是我吗？",
+        "answer": "你说的唐婕，是我吗？",
         "goto": "isme"
       },
       {
@@ -109,10 +410,11 @@
     "reply": [
       {
         "answer": "那好吧",
-        "goto": "ice"
+        "goto": "thatok"
       }
     ]
   },
+
   "dontblv": {
     "says": [
       "我不管，我说是你就是你，我是魔镜",
@@ -121,6 +423,126 @@
     "reply": [
       {
         "answer": "那好的吧，我勉强相信了",
+        "goto": "thatok"
+      }
+    ]
+  },
+  "thatok": {
+    "says": [
+      "你知道今天是什么节日吗？",
+      "是七夕呀！"
+    ],
+    "reply": [
+      {
+        "answer": "你是不是有病？自问自答",
+        "goto": "bing"
+      },
+      {
+        "answer": "是七夕然后呢？",
+        "goto": "going"
+      }
+    ]
+  },
+
+  "bing": {
+    "says": [
+      "什么呀，跟你说认真的"
+    ],
+    "reply": [
+      {
+        "answer": "那你说呀",
+        "goto": "going"
+      }
+    ]
+  },
+
+  "going": {
+    "says": [
+      "我一直觉得你跟别的小姐姐不一样",
+      "你懂得什么时候该成熟靠谱，什么时候乖巧"
+    ],
+    "reply": [
+      {
+        "answer": "胡说八道什么呀，快说说还有哪里不一样",
+        "goto": "differ"
+      },
+      {
+        "answer": "是吗？我一点儿也不觉得",
+        "goto": "dont-think-so"
+      }
+    ]
+  },
+
+  "dont-think-so": {
+    "says": [
+      "真的，还有啊",
+      "你不爱哭不爱闹，虽然有时候脾气有一点点不那么好，但是都会自己好起来"
+    ],
+    "reply": [
+      {
+        "answer": "等等，你不会是？",
+        "goto": "arentyou"
+      }
+    ]
+  },
+
+  "arentyou": {
+    "says": [
+      "是谁？"
+    ],
+    "reply": [
+      {
+        "answer": "大宝宝！是你吗？",
+        "goto": "thatsme"
+      }
+    ]
+  },
+
+  "thatsme": {
+    "says": [
+      "妈耶，你就猜到啦",
+      "你是怎么猜到的？"
+    ],
+    "reply": [
+      {
+        "answer": "...刚点开就知道是你，配合你演出了这么久",
+        "goto": "knew"
+      }
+    ]
+  },
+
+  "knew": {
+    "says": [
+      "哇你演得好好哦"
+    ],
+    "reply": [
+      {
+        "answer": "什么？",
+        "goto": "[todo]"
+      }
+    ]
+  },
+
+  "differ": {
+    "says": [
+      "还有惹你生气了你也会很快就自己解气了",
+      "也不会继续计较，炒鸡好"
+    ],
+    "reply": [
+      {
+        "answer": "我好像知道你是谁了",
+        "goto": "arentyou"
+      }
+    ]
+  },
+
+  "[todo]": {
+    "says": [
+      "待开发..."
+    ],
+    "reply": [
+      {
+        "answer": "好的",
         "goto": "ice"
       }
     ]
