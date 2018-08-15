@@ -188,12 +188,13 @@
 
   "oldstyle": {
     "says": [
-      "好像有一点..."
+      "好像是有一点土...",
+      "跟你说点别的吧"
     ],
     "reply": [
       {
-        "answer": "[todo]",
-        "goto": "[todo]"
+        "answer": "好呀",
+        "goto": "thatok"
       }
     ]
   },
@@ -207,18 +208,82 @@
       {
         "answer": "不知道呀，但是现在知道了",
         "goto": "nowiknow"
+      },
+      {
+        "answer": "早就知道了你是个傻子",
+        "goto": "fool"
+      }
+    ]
+  },
+
+  "fool": {
+    "says": [
+      "好丢人呀...",
+      "还以为把自己伪装得很完美呢...",
+      "这就尴尬了"
+    ],
+    "reply": [
+      {
+        "answer": "不尴尬不尴尬",
+        "goto": "notemb"
+      },
+      {
+        "answer": "是不是想把自己藏起来呀？",
+        "goto": "hide"
+      }
+    ]
+  },
+
+  "hide": {
+    "says": [
+      "是呀，想把自己藏起来",
+      "来都来了，不如就聊会天吧"
+    ],
+    "reply": [
+      {
+        "answer": "O什么K",
+        "goto": "letstalk"
+      }
+    ]
+  },
+
+  "notemb": {
+    "says": [
+      "赶紧找个天聊一下缓解一下尴尬气氛",
+      "如果我是9，那你是3",
+      "因为我除了你还是你"
+    ],
+    "reply": [
+      {
+        "answer": "啊啊啊，太土了",
+        "goto": "letstalk"
       }
     ]
   },
 
   "nowiknow": {
     "says": [
-      ""
+      "大宝宝，你好可爱哦"
     ],
     "reply": [
       {
-        "answer": "",
-        "goto": ""
+        "answer": "干嘛突然夸我",
+        "goto": "[todo]"
+      }
+    ]
+  },
+
+  "letstalk": {
+    "says": [
+      "莫文蔚的阴天",
+      "孙燕姿的雨天",
+      "周杰伦的晴天",
+      "都不如你和我聊天"
+    ],
+    "reply": [
+      {
+        "answer": "哈哈哈哈，你是不是傻",
+        "goto": "[todo]"
       }
     ]
   },
@@ -232,10 +297,97 @@
     "reply": [
       {
         "answer": "那当然",
-        "goto": "[todo]"
+        "goto": "ofcourse"
+      },
+      {
+        "answer": "我骗你的",
+        "goto": "fine"
       }
     ]
   },
+
+  "fine": {
+    "says": [
+      "这还差不多",
+      "我还以为你不爱他了呢"
+    ],
+    "reply": [
+      {
+        "answer": "不会的",
+        "goto": "mind"
+      }
+    ]
+  },
+
+
+  "ofcourse": {
+    "says": [
+      "那你喜欢哪一个类型的？",
+      "杨洋还是黄景瑜？"
+    ],
+    "reply": [
+      {
+        "answer": "杨洋",
+        "goto": "badgirl"
+      },
+      {
+        "answer": "黄景瑜",
+        "goto": "badgirl"
+      }
+    ]
+  },
+
+  "ofcourse-1": {
+    "says": [
+      "那你喜欢哪一个类型的？",
+      "杨洋还是黄景瑜？"
+    ],
+    "reply": [
+      {
+        "answer": "杨洋",
+        "goto": "badgirl"
+      },
+      {
+        "answer": "黄景瑜",
+        "goto": "badgirl"
+      },
+      {
+        "answer": "我男票",
+        "goto": "fine"
+      }
+    ]
+  },
+
+  "badgirl": {
+    "says": [
+      "哦？是吗？",
+      "你的男票生气了！"
+    ],
+    "reply": [
+      {
+        "answer": "啊什么鬼这是个坑",
+        "goto": "over"
+      },
+      {
+        "answer": "啊我不记得我有男票",
+        "goto": "over"
+      }
+    ]
+  },
+
+  "over": {
+    "says": [
+      "太过分了，不想理你了",
+      "重新选"
+    ],
+    "reply": [
+      {
+        "answer": "...好吧",
+        "goto": "ofcourse-1"
+      }
+    ]
+  },
+
   "guess": {
     "says": [
       "我不骗人的",

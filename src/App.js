@@ -59,7 +59,7 @@ class Bubble extends Component {
     return delay(dl)
     .then(_ =>
       this.setStateAsync({
-        width: this.shadowBubble.current.offsetWidth,
+        width: this.shadowBubble.current.offsetWidth + 4,
         height: this.shadowBubble.current.offsetHeight
       })
     )
