@@ -75,6 +75,38 @@
       {
         "answer": "是呀，老爱欺负我",
         "goto": "hurtme"
+      },
+      {
+        "answer": "也没有，就偶尔",
+        "goto": "sometime"
+      }
+    ]
+  },
+
+  "sometime": {
+    "says": [
+      "那要不要考虑换一个男朋友？"
+    ],
+    "reply": [
+      {
+        "answer": "好呀，你有介绍吗？",
+        "goto": "ofcourse"
+      },
+      {
+        "answer": "不要了，凑合着过吧",
+        "goto": "thatsit"
+      }
+    ]
+  },
+
+  "thatsit": {
+    "says": [
+      "呀，你还是爱他的吧"
+    ],
+    "reply": [
+      {
+        "answer": "嗯...等等，你是谁？",
+        "goto": "who"
       }
     ]
   },
@@ -95,6 +127,7 @@
   "cantdo": {
     "says": [
       "说的也是",
+      "他这个坏蛋，太过分了",
       "要不我们说点别的吧"
     ],
     "reply": [
@@ -113,11 +146,30 @@
     "reply": [
       {
         "answer": "生气！但没刚刚那么气了",
-        "goto": "[todo]"
+        "goto": "better"
       },
       {
         "answer": "不那么爱他了，以后也不想管他了",
-        "goto": "[todo]"
+        "goto": "wannaleave"
+      }
+    ]
+  },
+
+  "wannaleave": {
+    "says": [
+      "别呀小姑娘，再给他一次机会嘛，他可能已经知道自己错了",
+      "而且心里也默默地责备自己，悔过好多次了",
+      "只是嘴上没说出来",
+      "毕竟他那么蠢"
+    ],
+    "reply": [
+      {
+        "answer": "那好吧...等等你是谁",
+        "goto": "who"
+      },
+      {
+        "answer": "你管我，你是谁？",
+        "goto": "who"
       }
     ]
   },
@@ -134,8 +186,75 @@
         "goto": "havent"
       },
       {
-        "answer": "有男票，但他不爱听",
+        "answer": "有男票，但他不爱听，而且说了也没用",
         "goto": "dontlike"
+      },
+      {
+        "answer": "那你帮我跟男票说一下",
+        "goto": "contactbf"
+      }
+    ]
+  },
+
+  "contactbf": {
+    "says": [
+      "📞 正在联系小奶狗...",
+      "📞 正在告诉他这个事...",
+      "📞 正在获取他的回复...",
+      "小奶狗：宝宝宝宝，不开心你就跟我说呀，我愿意听的。",
+      "小奶狗：这么不开心的工作那不如不工作了呢，我养你！乖哦，不要不开心了！",
+      "<img alt=\"我家大宝贝呢\" src=\"http://img.wxcha.com/file/201712/20/06f8026bd9.gif\">"
+    ],
+    "reply": [
+      {
+        "answer": "啊！真的是他说的吗？",
+        "goto": "really"
+      },
+      {
+        "answer": "不跟你说了，我要去跟他聊天去",
+        "goto": "bye"
+      }
+    ]
+  },
+
+  "bye": {
+    "says": [
+      "快去吧"
+    ],
+    "reply": [
+      {
+        "answer": "再聊一次",
+        "goto": "ice"
+      }
+    ]
+  },
+
+  "really": {
+    "says": [
+      "当然是他说的呀",
+      "你可以跟他说的",
+      "那你现在开心一些了吗?"
+    ],
+    "reply": [
+      {
+        "answer": "好点了",
+        "goto": "better"
+      },
+      {
+        "answer": "没有",
+        "goto": "nobetter"
+      }
+    ]
+  },
+
+  "better": {
+    "says": [
+      "那就好"
+    ],
+    "reply": [
+      {
+        "answer": "话说你是谁？",
+        "goto": "who"
       }
     ]
   },
@@ -268,7 +387,49 @@
     "reply": [
       {
         "answer": "干嘛突然夸我",
-        "goto": "[todo]"
+        "goto": "aduanzi"
+      }
+    ]
+  },
+
+  "aduanzi": {
+    "says": [
+      "宝宝，你看你的脸"
+    ],
+    "reply": [
+      {
+        "answer": "怎么了？",
+        "goto": "whathappen"
+      }
+    ]
+  },
+
+  "whathappen": {
+    "says": [
+      "真可爱"
+    ],
+    "reply": [
+      {
+        "answer": "哈哈哈哈哈你有毒是不是",
+        "goto": "poison"
+      },
+      {
+        "answer": "别整这些虚的，你想跟我说啥？",
+        "goto": "startother"
+      }
+    ]
+  },
+
+  "poison": {
+    "says": [
+      "没有，就是喜欢你的可爱",
+      "那种嘟嘴嘴的可爱",
+      "<img alt=\"糖宝宝堵嘴\" src=\"http://7lryxc.com1.z0.glb.clouddn.com/aa.jpg\">"
+    ],
+    "reply": [
+      {
+        "answer": "你犯规，怎么可以发照片！！",
+        "goto": "startother"
       }
     ]
   },
@@ -282,8 +443,25 @@
     ],
     "reply": [
       {
-        "answer": "哈哈哈哈，你是不是傻",
-        "goto": "[todo]"
+        "answer": "哈哈哈哈，你是不是傻，土得掉渣",
+        "goto": "anotherone"
+      },
+      {
+        "answer": "打住！你想跟我说啥？",
+        "goto": "startother"
+      }
+    ]
+  },
+
+  "anotherone": {
+    "says": [
+      "我十拿九稳",
+      "只差你一吻 💋"
+    ],
+    "reply": [
+      {
+        "answer": "好啦，你想跟我说啥",
+        "goto": "startother"
       }
     ]
   },
@@ -361,7 +539,8 @@
   "badgirl": {
     "says": [
       "哦？是吗？",
-      "你的男票生气了！"
+      "你的男票生气了！",
+      "<img alt=\"你肯定是不爱我了\" src=\"http://img.wxcha.com/file/201806/28/4d938f389a.gif\">"
     ],
     "reply": [
       {
@@ -533,8 +712,8 @@
         "goto": "first"
       },
       {
-        "answer": "管你是谁，不重要🤷‍",
-        "goto": "ice"
+        "answer": "你知道我爱豆是谁吗？",
+        "goto": "idol"
       }
     ]
   },
@@ -611,7 +790,37 @@
   "going": {
     "says": [
       "我一直觉得你跟别的小姐姐不一样",
-      "你懂得什么时候该成熟靠谱，什么时候乖巧"
+      "嗯不一样"
+    ],
+    "reply": [
+      {
+        "answer": "哪不一样？",
+        "goto": "where"
+      }
+    ]
+  },
+
+  "where": {
+    "says": [
+      "长得不一样"
+    ],
+    "reply": [
+      {
+        "answer": "你再贫我要打你了",
+        "goto": "dare"
+      },
+      {
+        "answer": "......",
+        "goto": "dare"
+      }
+    ]
+  },
+
+  "dare": {
+    "says": [
+      "别别别，我说我说",
+      "你很了解人，你知道什么时候该成熟什么时候该可爱",
+      "你有时候黏人得像一只小猫猫"
     ],
     "reply": [
       {
@@ -628,11 +837,70 @@
   "dont-think-so": {
     "says": [
       "真的，还有啊",
-      "你不爱哭不爱闹，虽然有时候脾气有一点点不那么好，但是都会自己好起来"
+      "你不爱哭不爱闹，虽然有时候脾气有一点点不那么好，但是都会自己好起来",
+      "特别乖 🐈"
     ],
     "reply": [
       {
+        "answer": "继续说",
+        "goto": "goon"
+      },
+      {
         "answer": "等等，你不会是？",
+        "goto": "arentyou"
+      }
+    ]
+  },
+
+  "goon": {
+    "says": [
+      "没啦",
+      "不！还有",
+      "你就像是有魔法，能让生活变得不一样起来"
+    ],
+    "reply": [
+      {
+        "answer": "什么魔法",
+        "goto": "whatmagic"
+      },
+      {
+        "answer": "请叫我美少女",
+        "goto": "callme"
+      }
+    ]
+  },
+
+  "callme": {
+    "says": [
+      "知道了，美少女大人！"
+    ],
+    "reply": [
+      {
+        "answer": "没有“大人”这两个字！！",
+        "goto": "nodaren"
+      }
+    ]
+  },
+
+  "nodaren": {
+    "says": [
+      "好的，我的美少女战士！"
+    ],
+    "reply": [
+      {
+        "answer": "你是不是傻...等等，我知道你是谁了",
+        "goto": "arentyou"
+      }
+    ]
+  },
+
+  "whatmagic": {
+    "says": [
+      "就是要是你突然不在身边了，那个人就不能好好生活了"
+    ],
+    "reply": [
+      {
+        "answer": "我知道你是谁了",
         "goto": "arentyou"
       }
     ]
@@ -646,6 +914,41 @@
       {
         "answer": "大宝宝！是你吗？",
         "goto": "thatsme"
+      },
+      {
+        "answer": "点错了，我不知道你是谁",
+        "goto": "wrong"
+      }
+    ]
+  },
+
+  "wrong": {
+    "says": [
+      "没关系",
+      "你可以试试用浏览器打开这个网站嘛？",
+      "<a href=\"https://宇宙第一超级无敌美少女.com\">https://宇宙第一超级无敌美少女.com</a>",
+      "看了再回来回答"
+    ],
+    "reply": [
+      {
+        "answer": "我还是不知道",
+        "goto": "notkey"
+      },
+      {
+        "answer": "我知道你是谁了",
+        "goto": "arentyou"
+      }
+    ]
+  },
+
+  "notkey": {
+    "says": [
+      "嗯不重要"
+    ],
+    "reply": [
+      {
+        "answer": "我是小猪佩奇，这是我的弟弟乔治",
+        "goto": "thatsme"
       }
     ]
   },
@@ -653,24 +956,316 @@
   "thatsme": {
     "says": [
       "妈耶，你就猜到啦",
-      "你是怎么猜到的？"
+      "你是怎么猜到的？好厉害"
     ],
     "reply": [
       {
         "answer": "...刚点开就知道是你，配合你演出了这么久",
         "goto": "knew"
+      },
+      {
+        "answer": "这么会说话肯定是我的大宝宝",
+        "goto": "confirm"
+      },
+      {
+        "answer": "嗯猜不到就有鬼了",
+        "goto": "knew"
+      }
+    ]
+  },
+
+  "confirm": {
+    "says": [
+      "哈哈哈开心",
+      "<img alt=\"突然害羞\" src=\"http://img.wxcha.com/file/201806/08/61af9502c8.gif\">"
+    ],
+    "reply": [
+      {
+        "answer": "啊去去去，这你也信",
+        "goto": "iblv"
+      }
+    ]
+  },
+
+  "iblv": {
+    "says": [
+      "我信我信！小胖胖！！"
+    ],
+    "reply": [
+      {
+        "answer": "不许叫我小胖胖，生气了哼！",
+        "goto": "nopang"
+      },
+      {
+        "answer": "叫我干嘛",
+        "goto": "startother"
+      }
+    ]
+  },
+
+  "nopang": {
+    "says": [
+      "啊好 🤐",
+      "（可是我会控制不住我寄几）"
+    ],
+    "reply": [
+      {
+        "answer": "那好吧，不怪你了",
+        "goto": "startother"
+      }
+    ]
+  },
+
+  "startother": {
+    "says": [
+      "小胖胖，以后我们养一直狗狗和一只猫猫吧",
+      "给狗狗一个名字叫糖猫猫",
+      "猫猫的名字你来起吧"
+    ],
+    "reply": [
+      {
+        "answer": "糖狗狗",
+        "goto": "tgg"
+      },
+      {
+        "answer": "李德正",
+        "goto": "ldz"
+      }
+    ]
+  },
+
+  "tgg": {
+    "says": [
+      "为什么要给猫猫起狗狗的名字？",
+      "不过我觉得还挺好听，就这样定了吧"
+    ],
+    "reply": [
+      {
+        "answer": "我也想问为什么我只能两个选一个...",
+        "goto": "why"
+      },
+      {
+        "answer": "才不要",
+        "goto": "noway"
+      }
+    ]
+  },
+
+  "ldz": {
+    "says": [
+      "这名字听着像一只社会喵",
+      "还是不了吧"
+    ],
+    "reply": [
+      {
+        "answer": "那不行，就叫这个名字",
+        "goto": "thisname"
+      },
+      {
+        "answer": "那我们以后再给他们起名字呗",
+        "goto": "later"
+      }
+    ]
+  },
+
+  "why": {
+    "says": [
+      "额..我也想知道鸭",
+      "<img alt=\"鸭鸭撒拉嘿哟\" src=\"http://7lryxc.com1.z0.glb.clouddn.com/IMG_4503.jpg\">"
+    ],
+    "reply": [
+      {
+        "answer": "那我们以后再给他们起名字呗",
+        "goto": "later"
+      }
+    ]
+  },
+
+  "later": {
+    "says": [
+      "好呀，等我们给他们起名字之后",
+      "就努力让他们变成小明星，大网红",
+      "让他们变成最幸福的狗狗和猫猫！"
+    ],
+    "reply": [
+      {
+        "answer": "我也是这么想的",
+        "goto": "thinkso-1"
+      },
+      {
+        "answer": "不要硬打造他们当网红嘛",
+        "goto": "nohard"
+      }
+    ]
+  },
+
+  "thinkso-1": {
+    "says": [
+      "啊大宝宝",
+      "跟你在一起超级开心的",
+      "而且我想这么一直开心下去"
+    ],
+    "reply": [
+      {
+        "answer": "那你就嫁给我吧",
+        "goto": "marry"
+      }
+    ]
+  },
+
+  "marry": {
+    "says": [
+      "我会的！",
+      "这是我的户口本！",
+      "我还想和你一起",
+      "吃遍北京的网红餐厅",
+      "打卡你喜欢的网红店",
+      "去你想去的游乐园"
+    ],
+    "reply": [
+      {
+        "answer": "好呀，我答应你",
+        "goto": "letsgo"
+      }
+    ]
+  },
+
+  "nohard": {
+    "says": [
+      "也没有，也要尊重狗狗和猫猫自己的想法的"
+    ],
+    "reply": [
+      {
+        "answer": "那就对了",
+        "goto": "thinkso-1"
+      }
+    ]
+  },
+
+  "letsgo": {
+    "says": [
+      "哇开心到爆炸",
+      "那宝宝你有什么愿望也要跟我说呀",
+      "我要一个一个陪你去实现"
+    ],
+    "reply": [
+      {
+        "answer": "好，我以后会把愿望告诉你的",
+        "goto": "qixi"
+      },
+      {
+        "answer": "我们已经在路上了",
+        "goto": "qixi"
+      }
+    ]
+  },
+
+  "qixi": {
+    "says": [
+      "大宝宝七夕快乐哟",
+      "爱你爱你"
+    ],
+    "reply": [
+      {
+        "answer": "爱你❤️",
+        "goto": "ice"
+      },
+      {
+        "answer": "就这么结束啦？",
+        "goto": "noend"
+      }
+    ]
+  },
+
+  "noend": {
+    "says": [
+      "那当然不是啦，宝宝你开心嘛？"
+    ],
+    "reply": [
+      {
+        "answer": "开心",
+        "goto": "happy"
+      },
+      {
+        "answer": "不开心",
+        "goto": "howdoyouknow"
+      }
+    ]
+  },
+
+  "happy": {
+    "says": [
+      "开心那就结束吧",
+      "（其实是时间比较紧嗯...尴尬）"
+    ],
+    "reply": [
+      {
+        "answer": "再聊一次",
+        "goto": "ice"
+      }
+    ]
+  },
+
+  "youdidthis": {
+    "says": [
+      "我的锅！",
+      "那我们看狗狗和猫猫喜不喜欢这名字吧"
+    ],
+    "reply": [
+      {
+        "answer": "也阔以",
+        "goto": "later"
+      }
+    ]
+  },
+
+  "noway": {
+    "says": [
+      "你还嫌弃你自己起的名字"
+    ],
+    "reply": [
+      {
+        "answer": "明明都是你起的，不要甩锅",
+        "goto": "youdidthis"
+      }
+    ]
+  },
+
+  "thisname": {
+    "says": [
+      "那你也太草率了吧，这名字你让猫猫怎么抬起头做喵"
+    ],
+    "reply": [
+      {
+        "answer": "你说得有那么点道理",
+        "goto": "thinkso"
+      }
+    ]
+  },
+
+  "thinkso": {
+    "says": [
+      "那我们以后再给他们起名字吧",
+      "起一个好听的，会变成网红的那种"
+    ],
+    "reply": [
+      {
+        "answer": "好呀",
+        "goto": "later"
       }
     ]
   },
 
   "knew": {
     "says": [
-      "哇你演得好好哦"
+      "哇你演得好好哦",
+      "奥斯卡影帝！",
+      "话说回来，糖宝宝"
     ],
     "reply": [
       {
         "answer": "什么？",
-        "goto": "[todo]"
+        "goto": "startother"
       }
     ]
   },

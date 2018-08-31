@@ -13,6 +13,15 @@ html, body {
   position: relative;
 }
 
+a {
+  text-decoration: none;
+  color: #E64980;
+  font-weight: bold;
+}
+
+img {
+  width: 100%;
+}
 
 .row {
   padding: 0;
